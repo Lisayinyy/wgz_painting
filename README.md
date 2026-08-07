@@ -94,6 +94,17 @@ Wu Guanzhong (吴冠中, 1919–2010) Chinese ink-and-color painting.
 
 ## 对照拼版脚本 · Comparison Plate
 
+默认就是最终交付的版式：左原图、右水墨，中间一道白边作分隔，
+外边距收紧，不要任何文字标签。
+
+```bash
+python3 scripts/make_plate.py -o out.jpg \
+    --panel photo.jpg \
+    --panel ink.png
+```
+
+如果想加文字标签或主标题（默认不要），用冒号分隔：
+
 ```bash
 python3 scripts/make_plate.py -o out.jpg \
     --panel "photo.jpg:实拍原片:photograph" \

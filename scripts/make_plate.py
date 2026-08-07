@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-"""Build a labelled side-by-side comparison plate on a paper-toned ground.
+"""Build a side-by-side comparison plate on a paper-toned ground.
 
-Usage:
+Default output (used by the wuguanzhong-ink-translate skill):
+  python3 make_plate.py -o out.jpg \
+      --panel photo.jpg \
+      --panel ink.png
+
+The left panel is the original photograph; the right panel is the repainted ink
+version. No labels, no title — just the two images with a small white gap
+between them on a paper-toned background.
+
+To add optional labels and a title:
   python3 make_plate.py -o out.jpg \
       --panel photo.jpg:实拍原片:photograph \
       --panel ink.png:江南水乡路:"after Wu · Jiangnan" \
-      --title 吴冠中笔下的江南 --subtitle "一幅实拍照片 · 水墨语言的转译"
+      --title 吴冠中笔下的江南
 
 Each --panel is IMAGE[:CN_LABEL[:EN_LABEL]]. Panels are scaled to equal height.
 Requires Pillow.
@@ -53,8 +62,10 @@ def main():
     ap.add_argument("--title", default="")
     ap.add_argument("--subtitle", default="")
     ap.add_argument("--height", type=int, default=1400, help="panel height in px")
-    ap.add_argument("--gap", type=int, default=42)
-    ap.add_argument("--margin", type=int, default=64)
+    ap.add_argument("--gap", type=int, default=42,
+                    help="white gap between panels (the visible separator)")
+    ap.add_argument("--margin", type=int, default=20,
+                    help="outer margin around the whole plate")
     ap.add_argument("--font", default=None)
     args = ap.parse_args()
 

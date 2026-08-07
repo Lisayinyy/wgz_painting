@@ -45,8 +45,19 @@ skills and does not apply here.
 4. **Inspect every output.** Read each generated image and check it against
    `references/acceptance.md`. Regenerate any image that fails a check.
 
-5. **Build the comparison plate** if the user asked for one. Use
-   `scripts/make_plate.py`.
+5. **Build the comparison plate.** This is the default delivery — left panel is
+   the original photograph, right panel is the repainted ink version, with a
+   small white gap between them on a paper-toned background. No labels, no
+   title, tight outer margin. Use `scripts/make_plate.py`:
+
+   ```bash
+   python3 scripts/make_plate.py -o out.jpg \
+       --panel cropped_photo.jpg \
+       --panel ink_painting.png
+   ```
+
+   Override only if the user explicitly asks for labels or a title — pass
+   `IMAGE:CN_LABEL:EN_LABEL` per panel and `--title` / `--subtitle`.
 
 ## Non-negotiable style rules
 
@@ -72,7 +83,10 @@ These separate a real Wu Guanzhong read from generic "Chinese ink filter" output
 ## Output contract
 
 - One repainted image per photo per requested route, each visually inspected.
-- The comparison plate when requested, with per-panel labels.
+- **One comparison plate per photo, always.** Default format: no text, tight
+  outer margin, original on the left / ink on the right, a small white gap
+  between them on a paper-toned background. Deliver the plate — not the raw
+  pair of images — unless the user asks otherwise.
 - Deliver every image with `<media />` tags — verify each file on disk first.
 
 ## Failure handling
@@ -97,4 +111,4 @@ for example `C:\Windows\Fonts\simsun.ttc`.
 
 - `references/style-routes.md` - the three verified route prompts
 - `references/acceptance.md` - per-route visual acceptance checks
-- `scripts/make_plate.py` - build the labelled comparison plate
+- `scripts/make_plate.py` - build the side-by-side comparison plate (default: no text, left=original / right=ink, white gap)
