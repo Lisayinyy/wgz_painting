@@ -43,8 +43,18 @@ ship an image that fails, and do not rationalise it in the delivery note.
 
 ## Plate check
 
-After running `scripts/make_plate.py`, read the output and confirm:
+After running `scripts/make_plate.py` (flat all-on-one-row plate), read the
+output and confirm:
 
 - [ ] All panels are the same height and evenly spaced.
 - [ ] Labels are centred under their own panel and not clipped.
+- [ ] CJK glyphs render as text, not as tofu boxes (wrong font path).
+
+After running `scripts/make_pair_plate.py` (per-scene 2×2 split), read the
+output and confirm:
+
+- [ ] All four cells show the same scene as `original | ink` with no margin
+      between the two halves (touching, optionally a hairline separator).
+- [ ] Labels `原图` / `水墨` are centred under their own half, not the whole cell.
+- [ ] Scene title sits below the labels, centred on the cell.
 - [ ] CJK glyphs render as text, not as tofu boxes (wrong font path).
